@@ -1,0 +1,25 @@
+{
+  "name": "tw-battleship",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scratch.js",
+  "private": true,
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "lab",
+    "test-cov-html": "lab -r html -o coverage.html"
+  },
+  "keywords": [],
+  "author": "Nattaphoom Chaipreecha",
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^16.0.1"
+  },
+  "devDependencies": {
+    "code": "^4.0.0",
+    "eslint": "^3.11.1",
+    "eslint-config-airbnb-base": "^10.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "lab": "^11.2.1"
+  }
+}

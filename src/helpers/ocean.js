@@ -19,8 +19,6 @@ function createEmptyBoard(n) {
   return _.range(n).map(() => _.fill(Array(n), 0))
 }
 
-const EMPTY_BOARD = createEmptyBoard(BOARD_SIZE)
-
 function isOverflow(board, ship, position, line) {
   const [row, col] = position
   if (line === HORIZONTAL) {
@@ -52,8 +50,8 @@ function placeShip(board, ship, position, line = HORIZONTAL) {
 /**
  * Place ships randomly.
  */
-function initBoard(board) {
-  let newBoard = board
+function initBoard() {
+  let newBoard = createEmptyBoard(BOARD_SIZE)
   fleetsArray.forEach((ship) => {
     let count = 0
     while (count < ship.maximum) {

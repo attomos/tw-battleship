@@ -7,12 +7,12 @@ function placeShip(board, ship, position, line = HORIZONTAL) {
   const newBoard = board
 
   if (line === HORIZONTAL) {
-    for (let i = row; i < row + ship.width; i += 1) {
-      newBoard[i][col] = 1
+    for (let i = col; i < col + ship.width; i += 1) {
+      newBoard[row][i] = 1
     }
   } else if (line === VERTICAL) {
-    for (let i = col; i < col + ship.width; i += 1) {
-      newBoard[row][i] = ship
+    for (let i = row; i < row + ship.width; i += 1) {
+      newBoard[i][col] = 1
     }
   }
 

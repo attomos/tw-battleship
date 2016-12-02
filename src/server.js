@@ -6,6 +6,15 @@ const mainRoute = require('./routes/main')
 const server = new Hapi.Server()
 server.connection({ port: process.env.PORT || 8080 })
 
+server.state('session', {
+  domain: 'localhost',
+  encoding: 'base64json',
+  isHttpOnly: false,
+  isSameSite: false,
+  isSecure: false,
+  path: '/',
+})
+
 // Routes
 server.route(attackRoute)
 server.route(mainRoute)

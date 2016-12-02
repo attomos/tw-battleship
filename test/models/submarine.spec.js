@@ -153,6 +153,14 @@ describe('Submarine', () => {
       done()
     })
 
+    it('should return true when the position is already occupied', (done) => {
+      const board = placeShip(emptyBoard, submarine, [1, 1])
+      const position = [1, 1]
+      const actual = submarine.isOverlap(board, position)
+      expect(actual).to.equal(true)
+      done()
+    })
+
     it('should return false when there is no overlap', (done) => {
       const board = placeShip(emptyBoard, submarine, [5, 5])
       const position = [1, 1]

@@ -5,17 +5,17 @@ const GameSchema = {
   id: Number,
   board: Array,
   moves: Array,
-  positions: Array,
+  ships: Array,
   isFinish: Boolean,
 }
 
 const Game = mongoose.model('game', GameSchema)
 
 function createNewGame(time) {
-  const { board, positions } = initBoard()
+  const { board, ships } = initBoard()
   const game = new Game()
   game.id = time
-  game.positions = positions
+  game.ships = ships
   game.board = board
   game.isFinish = false
   return game

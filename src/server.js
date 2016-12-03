@@ -1,5 +1,4 @@
 const Hapi = require('hapi')
-const Joi = require('joi')
 
 const attackRoute = require('./routes/attack')
 const mainRoute = require('./routes/main')

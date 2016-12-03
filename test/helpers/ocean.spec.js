@@ -1,11 +1,10 @@
-
 const Code = require('code')
 const Lab = require('lab')
 
 const { BOARD_SIZE, HORIZONTAL, VERTICAL } = require('../../src/constants')
 
 const fleets = require('../../src/helpers/fleets')
-const { createEmptyBoard, isOverflow } = require('../../src/helpers/ocean')
+const { createEmptyBoard, initBoard, isOverflow } = require('../../src/helpers/ocean')
 
 // Test shortcuts
 const lab = exports.lab = Lab.script()
@@ -156,6 +155,18 @@ describe('Ocean', () => {
         expect(actual).to.equal(false)
         done()
       })
+    })
+  })
+
+  describe('initBoard', () => {
+    it('should return board and positions correctly', (done) => {
+      const actual = initBoard()
+      expect(actual).to.only.include(['board', 'positions'])
+      expect(actual.board).to.be.an.array()
+      expect(actual.board).to.have.length(BOARD_SIZE)
+      expect(actual.positions).to.be.an.array()
+      expect(actual.positions).to.have.length(1 + 2 + 3 + 4) // total ships
+      done()
     })
   })
 })

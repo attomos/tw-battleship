@@ -48,31 +48,38 @@ function placeShip(board, ship, position, line = HORIZONTAL) {
 }
 
 /**
- * Place ships randomly.
+ * Place ships randomly, then return { board, positions } object.
  */
 function initBoard() {
-  let newBoard = createEmptyBoard(BOARD_SIZE)
+  let board = createEmptyBoard(BOARD_SIZE)
+  const positions = []
   fleetsArray.forEach((ship) => {
     let count = 0
     while (count < ship.maximum) {
       let position = getRandomPosition()
       let line = getRandomLine()
-      while (isOverflow(newBoard, ship, position, line)) {
+      while (isOverflow(board, ship, position, line)) {
         position = getRandomPosition()
         line = getRandomLine()
       }
-      const before = _.cloneDeep(newBoard)
-      const tmpBoard = placeShip(newBoard, ship, position, line)
+      const before = _.cloneDeep(board)
+      const tmpBoard = placeShip(board, ship, position, line)
       if (!_.isEqual(before, tmpBoard)) { // place each ship to its maximum
-        newBoard = tmpBoard
+        positions.push({
+          ship,
+          position,
+          line,
+        })
+        board = tmpBoard
         count += 1
       }
     }
   })
-  return newBoard
+  return {
+    board,
+    positions,
+  }
 }
-
-// initBoard(EMPTY_BOARD)
 
 module.exports = {
   createEmptyBoard,

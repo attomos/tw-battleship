@@ -46,6 +46,24 @@ describe('Destroyer', () => {
     })
   })
 
+  describe('getPositions', () => {
+    it('should return positions correctly', (done) => {
+      const position = [0, 0]
+      let line = HORIZONTAL
+      let actual = destroyer.getPositions(position, line)
+      expect(actual).to.equal([
+        [0, 0], [0, 1],
+      ])
+
+      line = VERTICAL
+      actual = destroyer.getPositions(position, line)
+      expect(actual).to.equal([
+        [0, 0], [1, 0],
+      ])
+      done()
+    })
+  })
+
   describe('horizontal', () => {
     const line = HORIZONTAL
 

@@ -11,6 +11,21 @@ class Ship {
     this.maximum = maximum
   }
 
+  getPositions([row, col], line) {
+    const result = []
+    if (line === HORIZONTAL) {
+      for (let i = col; i < col + this.width; i += 1) {
+        result.push([row, i])
+      }
+    } else {
+      for (let i = row; i < row + this.width; i += 1) {
+        result.push([i, row])
+      }
+    }
+    return result
+  }
+
+
   getSurroundings(board, position, line) {
     const [row, col] = position
     const rowWise = line === HORIZONTAL ? this.height : this.width

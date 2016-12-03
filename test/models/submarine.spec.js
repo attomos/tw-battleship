@@ -45,6 +45,18 @@ describe('Submarine', () => {
     })
   })
 
+  describe('getPositions', () => {
+    it('should return positions correctly', (done) => {
+      const position = [9, 9]
+      let line = HORIZONTAL
+      let actual = submarine.getPositions(position, line)
+      expect(actual).to.equal([
+        [9, 9],
+      ])
+      done()
+    })
+  })
+
   describe('getSurroundings', () => {
     it('should return correctly when every border is valid', (done) => {
       let position = [1, 1]

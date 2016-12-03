@@ -45,4 +45,22 @@ describe('Battleship', () => {
       done()
     })
   })
+
+  describe('getPositions', () => {
+    it('should return positions correctly', (done) => {
+      const position = [0, 0]
+      let line = HORIZONTAL
+      let actual = battleship.getPositions(position, line)
+      expect(actual).to.equal([
+        [0, 0], [0, 1], [0, 2], [0, 3],
+      ])
+
+      line = VERTICAL
+      actual = battleship.getPositions(position, line)
+      expect(actual).to.equal([
+        [0, 0], [1, 0], [2, 0], [3, 0],
+      ])
+      done()
+    })
+  })
 })

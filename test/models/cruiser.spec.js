@@ -45,4 +45,22 @@ describe('Cruiser', () => {
       done()
     })
   })
+
+  describe('getPositions', () => {
+    it('should return positions correctly', (done) => {
+      const position = [0, 0]
+      let line = HORIZONTAL
+      let actual = cruiser.getPositions(position, line)
+      expect(actual).to.equal([
+        [0, 0], [0, 1], [0, 2],
+      ])
+
+      line = VERTICAL
+      actual = cruiser.getPositions(position, line)
+      expect(actual).to.equal([
+        [0, 0], [1, 0], [2, 0],
+      ])
+      done()
+    })
+  })
 })

@@ -48,17 +48,18 @@ describe('Destroyer', () => {
 
   describe('getPositions', () => {
     it('should return positions correctly', (done) => {
-      const position = [0, 0]
+      let position = [0, 0]
       let line = HORIZONTAL
       let actual = destroyer.getPositions(position, line)
       expect(actual).to.equal([
         [0, 0], [0, 1],
       ])
 
+      position = [5, 5]
       line = VERTICAL
       actual = destroyer.getPositions(position, line)
       expect(actual).to.equal([
-        [0, 0], [1, 0],
+        [5, 5], [6, 5],
       ])
       done()
     })

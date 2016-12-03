@@ -19,7 +19,7 @@ class Ship {
       }
     } else {
       for (let i = row; i < row + this.width; i += 1) {
-        result.push([i, row])
+        result.push([i, col])
       }
     }
     return result

@@ -48,8 +48,7 @@ describe('Submarine', () => {
   describe('getPositions', () => {
     it('should return positions correctly', (done) => {
       const position = [9, 9]
-      let line = HORIZONTAL
-      let actual = submarine.getPositions(position, line)
+      const actual = submarine.getPositions(position, line)
       expect(actual).to.equal([
         [9, 9],
       ])

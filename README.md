@@ -50,22 +50,13 @@ Game on!
 $ curl --cookie "session=eyJpZCI6MTQ4MDc1ODE2MTc3MX0=" localhost:8080/attack?position=1,2
 ```
 
-### Example gameplay
+### Gameplay example
+
+Let's say the board looks like this.
+
+![example-board.png](example-board.png)
 
 ```
-# Let's say the board looks like this.
-[
-  [ 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 ],
-  [ 0, 0, 0, 1, 0, 1, 0, 1, 0, 1 ],
-  [ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ],
-  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-  [ 0, 0, 0, 1, 1, 1, 1, 0, 0, 0 ],
-  [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-  [ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0 ],
-  [ 1, 0, 0, 1, 0, 1, 0, 0, 0, 1 ],
-  [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ],
-  [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 ]
-],
 
 # My first two moves are missed.
 $ curl --cookie "session=eyJpZCI6MTQ4MDc1ODE2MTc3MX0=" localhost:8080/attack?position=1,2
@@ -77,7 +68,7 @@ Miss
 $ curl --cookie "session=eyJpZCI6MTQ4MDc1ODE2MTc3MX0=" localhost:8080/attack?position=0,3
 Hit
 
-$ curl --cookie "session=eyJpZCI6MTQ4MDc1ODE2MTc3MX0=" localhost:8080/attack?position=0,3
+$ curl --cookie "session=eyJpZCI6MTQ4MDc1ODE2MTc3MX0=" localhost:8080/attack?position=1,3
 You just sank the Destroyer
 
 $ curl --cookie "session=eyJpZCI6MTQ4MDc1ODE2MTc3MX0=" localhost:8080/attack?position=0,5

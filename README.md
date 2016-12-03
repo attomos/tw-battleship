@@ -3,11 +3,20 @@
 
 ## Install dependencies
 
-    yarn
+```
+yarn
+```
 
 ## Run unit test
+```
+yarn test
+```
 
-    yarn test
+## Run unit test with fsmonitor (optional)
+```
+fsmonitor -s -p '+*.js' yarn test
+```
+See [this issue](https://github.com/hapijs/lab/issues/73).
 
 ## Instruction
 

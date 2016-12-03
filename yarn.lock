@@ -119,7 +119,7 @@ bluebird@2.10.2:
   version "2.10.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.10.2.tgz#024a5517295308857f14f91f1106fc3b555f446b"
 
-boom@4.x.x:
+boom@4.x.x, boom@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/boom/-/boom-4.2.0.tgz#c1a74174b11fbba223f6162d4fd8851a1b82a536"
   dependencies:
@@ -824,7 +824,7 @@ items@2.x.x:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/items/-/items-2.1.1.tgz#8bd16d9c83b19529de5aea321acaada78364a198"
 
-joi@10.x.x:
+joi@10.x.x, joi@^10.0.2:
   version "10.0.2"
   resolved "https://registry.yarnpkg.com/joi/-/joi-10.0.2.tgz#02b970ec29251f0c185615056adf3e984af2c426"
   dependencies:

@@ -184,27 +184,30 @@ describe('Ocean', () => {
   describe('attack', () => {
     it('should return "Miss" when the attacker misses', (done) => {
       const moves = []
+      const sankShipIds = []
       const position = [0, 0]
-      const actual = attack(board, moves, ships, position)
+      const actual = attack(board, moves, sankShipIds, ships, position)
       expect(actual).to.equal('Miss')
       done()
     })
 
     it('should return "Hit" when a ship has been hit but not sunk', (done) => {
       const moves = []
+      const sankShipIds = []
       const position = [3, 3]
-      const actual = attack(board, moves, ships, position)
+      const actual = attack(board, moves, sankShipIds, ships, position)
       expect(actual).to.equal('Hit')
       done()
     })
 
     it('should return "You just sank the X" when a ship has been sunk', (done) => {
       const moves = []
+      const sankShipIds = []
       let position = [3, 3]
-      let actual = attack(board, moves, ships, position)
+      let actual = attack(board, moves, sankShipIds, ships, position)
 
       position = [4, 3]
-      actual = attack(board, moves, ships, position)
+      actual = attack(board, moves, sankShipIds, ships, position)
 
       expect(actual).to.equal('You just sank the Destroyer')
       done()
@@ -214,16 +217,18 @@ describe('Ocean', () => {
   describe('isFinish', () => {
     it('should return false when there are more ships to hit', (done) => {
       const moves = []
-      const attackAt = makeAttacker(board, moves, ships)
+      const sankShipIds = []
+      const attackAt = makeAttacker(board, moves, sankShipIds, ships)
       attackAt(0, 0)
-      const actual = isWin(ships)
+      const actual = isWin(sankShipIds)
       expect(actual).to.equal(false)
       done()
     })
 
     it('should return true when all ships have been sank', (done) => {
       const moves = []
-      const attackAt = makeAttacker(board, moves, ships)
+      const sankShipIds = []
+      const attackAt = makeAttacker(board, moves, sankShipIds, ships)
       // submarines
       attackAt(1, 1)
 
@@ -258,7 +263,7 @@ describe('Ocean', () => {
       attackAt(5, 6)
       attackAt(6, 6)
 
-      const actual = isWin(ships)
+      const actual = isWin(sankShipIds)
       expect(actual).to.equal(true)
       done()
     })
@@ -267,7 +272,8 @@ describe('Ocean', () => {
   describe('getWinMessage', () => {
     it('should return message with a correct number of moves', (done) => {
       const moves = []
-      const attackAt = makeAttacker(board, moves, ships)
+      const sankShipIds = []
+      const attackAt = makeAttacker(board, moves, sankShipIds, ships)
       // submarines
       attackAt(1, 1)
 
@@ -307,9 +313,57 @@ describe('Ocean', () => {
       done()
     })
 
+    it('should return message with a correct number of moves when there are duplicate hits', (done) => {
+      const moves = []
+      const sankShipIds = []
+      const attackAt = makeAttacker(board, moves, sankShipIds, ships)
+      // submarines
+      attackAt(1, 1)
+      // duplicate hits
+      attackAt(1, 1)
+      attackAt(1, 1)
+      attackAt(1, 1)
+
+      attackAt(4, 9)
+
+      attackAt(7, 2)
+
+      attackAt(9, 2)
+
+      // destroyers
+      attackAt(0, 5)
+      attackAt(1, 5)
+
+      attackAt(0, 8)
+      attackAt(1, 8)
+
+      attackAt(3, 3)
+      attackAt(4, 3)
+
+      // cruisers
+      attackAt(6, 0)
+      attackAt(7, 0)
+      attackAt(8, 0)
+
+      attackAt(8, 6)
+      attackAt(8, 7)
+      attackAt(8, 8)
+
+      // battleship
+      attackAt(3, 6)
+      attackAt(4, 6)
+      attackAt(5, 6)
+      attackAt(6, 6)
+
+      const actual = getWinMessage(moves)
+      expect(actual).to.equal('Win! You completed the game in 23 moves')
+      done()
+    })
+
     it('should return message with a correct number of moves when there are misses', (done) => {
       const moves = []
-      const attackAt = makeAttacker(board, moves, ships)
+      const sankShipIds = []
+      const attackAt = makeAttacker(board, moves, sankShipIds, ships)
       // misses
       attackAt(0, 0)
       attackAt(0, 1)

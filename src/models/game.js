@@ -5,6 +5,7 @@ const GameSchema = {
   id: Number,
   board: Array,
   moves: Array,
+  sankShipIds: Array,
   ships: Array,
   isFinish: Boolean,
 }

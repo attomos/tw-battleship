@@ -4,6 +4,9 @@ const fleets = require('../helpers/fleets')
 
 const fleetsKeys = Object.keys(fleets)
 const fleetsArray = fleetsKeys.map(key => fleets[key])
+const totalShips = _(fleetsArray)
+  .map(ship => ship.maximum)
+  .sum()
 
 function getRandomPosition() {
   const randomRow = _.random(BOARD_SIZE - 1)
@@ -47,7 +50,7 @@ function placeShip(board, ship, position, line = HORIZONTAL) {
   return newBoard
 }
 
-function hitOrSank(board, moves, ships, [row, col]) {
+function hitOrSank(board, moves, sankShipIds, ships, [row, col]) {
   const position = [row, col]
   let result = 'Hit'
   const findPosition = ship => _.find(ship.positions, p => _.isEqual(p, position))
@@ -59,7 +62,7 @@ function hitOrSank(board, moves, ships, [row, col]) {
     const found = _.find(s.positions, pos => _.isEqual(pos, position))
     if (found) {
       result = `You just sank the ${shipName}`
-      _.pullAt(ships, index) // remove the sank ship from ships array
+      sankShipIds.push(index)
     }
   } else {
     const merged = _.concat(moves, [position])
@@ -72,31 +75,29 @@ function hitOrSank(board, moves, ships, [row, col]) {
     })
     if (sank) {
       result = `You just sank the ${shipName}`
-      _.pullAt(ships, index) // remove the sank ship from ships array
+      sankShipIds.push(index)
     }
   }
   return result
 }
 
-function attack(board, moves, ships, [row, col]) {
+function attack(board, moves, sankShipIds, ships, [row, col]) {
   const position = [row, col]
   moves.push(position)
   if (board[row][col] === 1) {
-    return hitOrSank(board, moves, ships, [row, col])
+    return hitOrSank(board, moves, sankShipIds, ships, [row, col])
   }
   return 'Miss'
 }
 
-function isWin(ships) {
-  return ships.length === 0
-}
+const makeAttacker = (board, moves, sankShipIds, ships) =>
+  (...position) => attack(board, moves, sankShipIds, ships, position)
+
+const isWin = sankShipIds => _.uniq(sankShipIds).length === totalShips
 
 function getWinMessage(moves) {
   return `Win! You completed the game in ${moves.length} moves`
 }
-
-const makeAttacker = (board, moves, ships) =>
-  (...position) => attack(board, moves, ships, position)
 
 /**
  * Place ships randomly, then return { board, ships } object.

@@ -23,6 +23,7 @@ See [this issue](https://github.com/hapijs/lab/issues/73).
 ### 1. Make a request to "/" endpoint.
 
 ```
+$ curl -v localhost:8080
 * Rebuilt URL to: localhost:8080/
 *   Trying 127.0.0.1...
 * Connected to localhost (127.0.0.1) port 8080 (#0)

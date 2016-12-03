@@ -11,6 +11,9 @@ class Ship {
     this.maximum = maximum
   }
 
+  /**
+   * Return all positions that the ship needs.
+   */
   getPositions([row, col], line) {
     const result = []
     if (line === HORIZONTAL) {
@@ -53,8 +56,10 @@ class Ship {
     const checkOverlap = makeOverlapChecker(board)
     if (checkOverlap(position)) return true
     const surroundings = this.getSurroundings(board, position, line)
-    const result = surroundings.map(checkOverlap)
-    return result.some(e => e)
+    const overlapSurroundings = surroundings.map(checkOverlap)
+    const positions = this.getPositions(position, line)
+    const overlapPositions = positions.map(checkOverlap)
+    return overlapSurroundings.some(e => e) || overlapPositions.some(e => e)
   }
 }
 

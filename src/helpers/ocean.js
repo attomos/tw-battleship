@@ -47,12 +47,63 @@ function placeShip(board, ship, position, line = HORIZONTAL) {
   return newBoard
 }
 
+function hitOrSank(board, moves, ships, [row, col]) {
+  const position = [row, col]
+  let result = 'Hit'
+  const findPosition = ship => _.find(ship.positions, p => _.isEqual(p, position))
+  const s = _.find(ships, findPosition)
+  const index = _.findIndex(ships, findPosition)
+
+  const shipName = s.ship.name
+  if (shipName === 'Submarine') {
+    const found = _.find(s.positions, pos => _.isEqual(pos, position))
+    if (found) {
+      result = `You just sank the ${shipName}`
+      _.pullAt(ships, index) // remove the sank ship from ships array
+    }
+  } else {
+    const merged = _.concat(moves, [position])
+    let sank = true
+    _.forEach(s.positions, (pos) => {
+      const found = _.find(merged, e => _.isEqual(pos, e))
+      if (!found) {
+        sank = false
+      }
+    })
+    if (sank) {
+      result = `You just sank the ${shipName}`
+      _.pullAt(ships, index) // remove the sank ship from ships array
+    }
+  }
+  return result
+}
+
+function attack(board, moves, ships, [row, col]) {
+  const position = [row, col]
+  moves.push(position)
+  if (board[row][col] === 1) {
+    return hitOrSank(board, moves, ships, [row, col])
+  }
+  return 'Miss'
+}
+
+function isWin(ships) {
+  return ships.length === 0
+}
+
+function getWinMessage(moves) {
+  return `Win! You completed the game in ${moves.length} moves`
+}
+
+const makeAttacker = (board, moves, ships) =>
+  (...position) => attack(board, moves, ships, position)
+
 /**
- * Place ships randomly, then return { board, positions } object.
+ * Place ships randomly, then return { board, ships } object.
  */
 function initBoard() {
   let board = createEmptyBoard(BOARD_SIZE)
-  const positions = []
+  const ships = []
   fleetsArray.forEach((ship) => {
     let count = 0
     while (count < ship.maximum) {
@@ -65,9 +116,10 @@ function initBoard() {
       const before = _.cloneDeep(board)
       const tmpBoard = placeShip(board, ship, position, line)
       if (!_.isEqual(before, tmpBoard)) { // place each ship to its maximum
-        positions.push({
+        const positions = ship.getPositions(position, line)
+        ships.push({
           ship,
-          position,
+          positions,
           line,
         })
         board = tmpBoard
@@ -77,13 +129,17 @@ function initBoard() {
   })
   return {
     board,
-    positions,
+    ships,
   }
 }
 
 module.exports = {
+  attack,
   createEmptyBoard,
+  getWinMessage,
   initBoard,
   isOverflow,
+  isWin,
+  makeAttacker,
   placeShip,
 }

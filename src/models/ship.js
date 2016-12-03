@@ -4,7 +4,8 @@ const makeOverlapChecker = board => ([row, col]) => !!board[row][col]
 
 class Ship {
   constructor(options) {
-    const { width, height = 1, maximum } = options
+    const { name, width, height = 1, maximum } = options
+    this.name = name
     this.width = width
     this.height = height
     this.maximum = maximum

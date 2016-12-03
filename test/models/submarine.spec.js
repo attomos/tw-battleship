@@ -35,6 +35,16 @@ describe('Submarine', () => {
     done()
   })
 
+  describe('properties', () => {
+    it('should have correct width, height, maximum, and name', (done) => {
+      expect(submarine.width).to.equal(1)
+      expect(submarine.height).to.equal(1)
+      expect(submarine.maximum).to.equal(4)
+      expect(submarine.name).to.equal('Submarine')
+      done()
+    })
+  })
+
   describe('getSurroundings', () => {
     it('should return correctly when every border is valid', (done) => {
       let position = [1, 1]

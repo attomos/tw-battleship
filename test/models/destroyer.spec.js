@@ -36,6 +36,16 @@ describe('Destroyer', () => {
     done()
   })
 
+  describe('properties', () => {
+    it('should have correct width, height, maximum, and name', (done) => {
+      expect(destroyer.width).to.equal(2)
+      expect(destroyer.height).to.equal(1)
+      expect(destroyer.maximum).to.equal(3)
+      expect(destroyer.name).to.equal('Destroyer')
+      done()
+    })
+  })
+
   describe('horizontal', () => {
     const line = HORIZONTAL
 
